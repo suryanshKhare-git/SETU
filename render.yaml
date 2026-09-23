@@ -1,0 +1,38 @@
+services:
+  # -------------------------------------------------------------
+  # 1. SETU Production Frontend (React 19 + Vite + Tailwind SPA)
+  # Zero cold-start latency, high-performance global CDN
+  # -------------------------------------------------------------
+  - type: web
+    name: setu-crime-analysis
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+
+  # -------------------------------------------------------------
+  # 2. SETU Intelligence Backend (FastAPI Analytics Engine)
+  # -------------------------------------------------------------
+  - type: web
+    name: setu-crime-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    region: oregon
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: APP_ENV
+        value: production

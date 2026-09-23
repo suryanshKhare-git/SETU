@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #e9e5dc;
+    --bg-surface: #f7f5ef;
+    --bg-card: #ffffff;
+    --border-color: #d8d1c4;
+    --text-primary: #182433;
+    --text-secondary: #5f5b54;
+  }
+
+  body {
+    background-color: #e9e5dc;
+    color: #182433;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    user-select: text;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Casework redesign: a restrained briefing-room palette replaces the stock neon dashboard. */
+.casework-shell { background: #e9e5dc !important; color: #182433 !important; }
+.casework-shell main { background: #e9e5dc; }
+.casework-sidebar { width: 17rem !important; background: #182433 !important; border-color: #293a4c !important; color: #f5f1e8; }
+.casework-sidebar { transition: width .2s ease, transform .2s ease; position: relative; z-index: 50; }
+.sidebar-collapse-toggle { color: #b8c1c6; padding: .35rem; border-radius: 2px; transition: background .15s ease, color .15s ease; }
+.sidebar-collapse-toggle:hover { background: #31485c; color: #fff8ee; }
+.casework-sidebar.is-collapsed { width: 4.5rem !important; }
+.casework-sidebar.is-collapsed > div:first-child { justify-content: center !important; padding-left: .5rem !important; padding-right: .5rem !important; }
+.casework-sidebar.is-collapsed > div:first-child > button:first-child > span { display: none !important; }
+.casework-sidebar.is-collapsed > div:first-child > button:first-child { flex: 1; justify-content: center; }
+.casework-sidebar.is-collapsed .sidebar-collapse-toggle { flex: 0 0 auto; padding: .3rem !important; }
+.casework-sidebar.is-collapsed .brand-unit,
+.casework-sidebar.is-collapsed nav span:not(:first-child),
+.casework-sidebar.is-collapsed > div:not(:first-child) .truncate,
+.casework-sidebar.is-collapsed > div:not(:first-child) .text-\[10px\],
+.casework-sidebar.is-collapsed > div:not(:first-child) .text-\[11px\] { display: none !important; }
+.casework-sidebar.is-collapsed > div { padding-left: .75rem !important; padding-right: .75rem !important; }
+.casework-sidebar.is-collapsed nav { padding-left: .75rem !important; padding-right: .75rem !important; }
+.casework-sidebar.is-collapsed nav button { justify-content: center; padding-left: .5rem !important; padding-right: .5rem !important; }
+.casework-sidebar.is-collapsed .p-2 { padding: .35rem !important; }
+.mobile-menu-toggle, .mobile-nav-scrim { display: none; }
+
+/* Presentation mode changes the reading experience, not just the button text. */
+.presentation-mode main { background: #e2ddd2 !important; }
+.presentation-mode .casework-sidebar { display: none; }
+.presentation-mode .casework-header .qr-toggle,
+.presentation-mode .casework-header .reset-toggle,
+.presentation-mode .casework-header .role-toggle { display: none !important; }
+.presentation-mode .casework-header { position: relative; padding-right: 11rem !important; }
+.presentation-mode .casework-header::after { content: 'PRESENTATION MODE'; position: absolute; right: 4.5rem; top: 50%; transform: translateY(-50%); color: #a33b32; font: 700 .65rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
+.presentation-briefing-bar { display: flex; align-items: center; gap: .6rem; min-height: 2rem; padding: .4rem 1.5rem; background: #182433; color: #f7f2e8; font-size: .72rem; overflow: hidden; }
+.presentation-live-dot { width: .45rem; height: .45rem; border-radius: 999px; background: #dfb85d; box-shadow: 0 0 0 3px rgba(223,184,93,.15); flex: 0 0 auto; }
+.presentation-case-label { color: #dfb85d; font: 700 .62rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; }
+.presentation-case-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #f7f2e8; }
+.presentation-deck { position: fixed; z-index: 70; left: 50%; bottom: 1.5rem; transform: translateX(-50%); display: flex; padding: .3rem; border: 1px solid #4b5d6b; background: rgba(24,36,51,.96); box-shadow: 0 12px 30px rgba(24,36,51,.28); border-radius: 4px; backdrop-filter: blur(10px); }
+.presentation-deck button { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .75rem; border-radius: 2px; color: #c9d1d4; font-size: .7rem; font-weight: 600; transition: background .15s ease, color .15s ease; }
+.presentation-deck button span { color: #87959e; font: .6rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.presentation-deck button:hover { background: #2b4052; color: #fff8ee; }
+.presentation-deck button.is-active { background: #a33b32; color: #fff8ee; }
+.presentation-deck button.is-active span { color: #f5d994; }
+.presentation-mode main .text-xs { font-size: .8125rem !important; }
+.presentation-mode main .text-sm { font-size: .9375rem !important; }
+.presentation-mode main .text-base { font-size: 1.0625rem !important; }
+.presentation-mode main .text-lg { font-size: 1.1875rem !important; }
+.presentation-mode main .text-xl { font-size: 1.375rem !important; }
+.presentation-mode main .text-2xl { font-size: 1.75rem !important; }
+.presentation-mode .casework-header { box-shadow: inset 0 -3px #a33b32, 0 1px 0 rgba(24,36,51,.08); }
+.presentation-mode .presentation-toggle { background: #a33b32 !important; color: #fff8ee !important; border-color: #822e27 !important; }
+.casework-sidebar > div { border-color: #293a4c !important; }
+.casework-sidebar .bg-\[\#0E1420\]\/80, .casework-sidebar .bg-\[\#0E1420\]\/60 { background: #1d2b3b !important; }
+.casework-sidebar .bg-slate-900\/90, .casework-sidebar .bg-slate-900\/50 { background: #243447 !important; border-color: #385068 !important; }
+.casework-sidebar .bg-slate-800 { background: #31485c !important; border-color: #4a647b !important; }
+.casework-sidebar .text-white { color: #f7f2e8 !important; }
+.casework-sidebar .text-slate-400, .casework-sidebar .text-slate-500 { color: #b8c1c6 !important; }
+.casework-sidebar .text-teal-400, .casework-sidebar .text-teal-300 { color: #e6b75f !important; }
+.casework-sidebar .bg-teal-950 { background: #493b23 !important; border-color: #b88a39 !important; }
+.casework-sidebar nav button { border-radius: 2px !important; letter-spacing: .015em; }
+.casework-sidebar nav button:hover { background: #243447 !important; }
+.casework-sidebar nav button.bg-slate-800 { background: #b14a3e !important; color: #fff8ee !important; box-shadow: inset 3px 0 #f2c66d; }
+.brand-unit { display: block; font-size: 8px; font-weight: 500; letter-spacing: .18em; color: #b8c1c6; margin-top: 1px; }
+.casework-header { height: 4.5rem !important; background: #f7f5ef !important; border-color: #d8d1c4 !important; color: #182433 !important; box-shadow: 0 1px 0 rgba(24,36,51,.04); }
+.casework-header .text-white, .casework-header .text-slate-200, .casework-header .text-slate-300 { color: #182433 !important; }
+.casework-header .text-slate-400, .casework-header .text-slate-500, .casework-header .text-slate-600 { color: #706b62 !important; }
+.casework-header .bg-slate-800, .casework-header .bg-slate-900 { background: #fff !important; border-color: #d8d1c4 !important; }
+.casework-header .absolute { background: #f7f5ef !important; border-color: #d8d1c4 !important; box-shadow: 0 12px 28px rgba(24,36,51,.16) !important; }
+.casework-header .absolute .bg-slate-900, .casework-header .absolute .bg-\[\#111827\] { background: #ebe6da !important; }
+.casework-header .absolute .text-white, .casework-header .absolute .text-slate-200, .casework-header .absolute .text-slate-300 { color: #182433 !important; }
+.casework-header .absolute .text-slate-400, .casework-header .absolute .text-slate-500 { color: #706b62 !important; }
+.casework-header .hover\:bg-slate-700:hover, .casework-header .hover\:bg-slate-800\/80:hover { background: #f0ece3 !important; }
+.casework-header .text-teal-400, .casework-header .text-teal-300 { color: #a33b32 !important; }
+.casework-page { background: #e9e5dc !important; color: #182433 !important; }
+.casework-page .text-white, .casework-page .text-slate-200 { color: #182433 !important; }
+.casework-page .text-slate-300, .casework-page .text-slate-400, .casework-page .text-slate-500 { color: #706b62 !important; }
+.casework-page .bg-\[\#111827\], .casework-page .bg-\[\#0E1420\], .casework-page .bg-slate-900 { background: #f7f5ef !important; }
+.casework-page .bg-slate-800 { background: #ebe6da !important; }
+.casework-page .border-slate-800, .casework-page .border-slate-700 { border-color: #d8d1c4 !important; }
+.casework-page .text-teal-400, .casework-page .text-teal-300 { color: #a33b32 !important; }
+.casework-page .bg-teal-600 { background: #a33b32 !important; }
+.casework-page .hover\:bg-teal-500:hover { background: #822e27 !important; }
+.casework-page .rounded-lg { border-radius: 3px !important; box-shadow: 0 2px 9px rgba(31,40,45,.045); }
+.casework-page .rounded-md { border-radius: 2px !important; }
+.eyebrow { margin-bottom: .45rem; color: #a33b32; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+
+/* Apply the same calm materials to every retained feature view and modal. */
+.casework-shell main > * { color: #182433; }
+.casework-shell main .bg-\[\#0B0F17\], .casework-shell main .bg-\[\#0E1420\], .casework-shell main .bg-\[\#111827\], .casework-shell main .bg-slate-900 { background-color: #f7f5ef !important; }
+.casework-shell main .bg-slate-800 { background-color: #ebe6da !important; }
+.casework-shell main .text-white, .casework-shell main .text-slate-100, .casework-shell main .text-slate-200 { color: #182433 !important; }
+.casework-shell main .text-slate-300, .casework-shell main .text-slate-400, .casework-shell main .text-slate-500, .casework-shell main .text-slate-600 { color: #706b62 !important; }
+.casework-shell main .border-slate-800, .casework-shell main .border-slate-700 { border-color: #d8d1c4 !important; }
+.casework-shell main .text-teal-300, .casework-shell main .text-teal-400 { color: #a33b32 !important; }
+.casework-shell main .bg-teal-600, .casework-shell main .bg-teal-700 { background-color: #a33b32 !important; }
+.casework-shell main .hover\:bg-teal-500:hover, .casework-shell main .hover\:bg-teal-600:hover { background-color: #822e27 !important; }
+.casework-shell main .rounded-xl, .casework-shell main .rounded-lg { border-radius: 4px !important; }
+
+.bg-setu-bg { background: #e9e5dc !important; color: #182433; }
+.bg-setu-bg > div > div.bg-white { background: #f7f5ef !important; border-color: #d8d1c4 !important; border-radius: 4px !important; box-shadow: 10px 10px 0 #d5cdbd !important; }
+.bg-setu-bg .text-setu-text { color: #182433 !important; }
+.bg-setu-bg .bg-blue-600 { background: #a33b32 !important; }
+.bg-setu-bg .hover\:bg-blue-700:hover { background: #822e27 !important; }
+.bg-setu-bg .text-blue-600 { color: #a33b32 !important; }
+.bg-setu-bg input { background: #fffdf8 !important; border-color: #cfc6b7 !important; border-radius: 2px !important; color: #182433 !important; }
+.bg-setu-bg input:focus { --tw-ring-color: #a33b32 !important; }
+
+/* Feature views use a number of local Tailwind colour variants. Normalize
+   those variants here so every retained tool feels part of one product. */
+.casework-shell :where(main, .fixed) [class*="bg-slate-"] { background-color: #f7f5ef !important; }
+.casework-shell :where(main, .fixed) [class*="bg-[#0"] { background-color: #f7f5ef !important; }
+.casework-shell :where(main, .fixed) [class*="bg-teal-9"] { background-color: #f7e8e4 !important; }
+.casework-shell :where(main, .fixed) [class*="bg-cyan-9"], .casework-shell :where(main, .fixed) [class*="bg-blue-9"], .casework-shell :where(main, .fixed) [class*="bg-purple-9"] { background-color: #e8edf0 !important; }
+.casework-shell :where(main, .fixed) [class*="bg-amber-9"] { background-color: #fbf0d9 !important; }
+.casework-shell :where(main, .fixed) [class*="bg-emerald-9"] { background-color: #e5f0e8 !important; }
+.casework-shell :where(main, .fixed) [class*="bg-red-9"] { background-color: #f8e5e1 !important; }
+.casework-shell :where(main, .fixed) [class*="border-slate-"] { border-color: #d8d1c4 !important; }
+.casework-shell :where(main, .fixed) [class*="border-teal-"] { border-color: #c98b82 !important; }
+.casework-shell :where(main, .fixed) [class*="border-cyan-"], .casework-shell :where(main, .fixed) [class*="border-blue-"], .casework-shell :where(main, .fixed) [class*="border-purple-"] { border-color: #aabdc7 !important; }
+.casework-shell :where(main, .fixed) [class*="border-amber-"] { border-color: #ddbd7a !important; }
+.casework-shell :where(main, .fixed) [class*="border-emerald-"] { border-color: #9bbca5 !important; }
+.casework-shell :where(main, .fixed) [class*="border-red-"] { border-color: #d8998f !important; }
+.casework-shell :where(main, .fixed) [class*="text-teal-"] { color: #a33b32 !important; }
+.casework-shell :where(main, .fixed) [class*="text-cyan-"], .casework-shell :where(main, .fixed) [class*="text-blue-"], .casework-shell :where(main, .fixed) [class*="text-purple-"] { color: #426777 !important; }
+.casework-shell :where(main, .fixed) [class*="text-amber-"] { color: #9a621c !important; }
+.casework-shell :where(main, .fixed) [class*="text-emerald-"] { color: #39735c !important; }
+.casework-shell :where(main, .fixed) [class*="text-red-"] { color: #a33b32 !important; }
+.casework-shell :where(main, .fixed) input, .casework-shell :where(main, .fixed) select, .casework-shell :where(main, .fixed) textarea { background: #fffdf8 !important; color: #182433 !important; border-color: #cfc6b7 !important; }
+.casework-shell :where(main, .fixed) input::placeholder, .casework-shell :where(main, .fixed) textarea::placeholder { color: #8a8277 !important; }
+.casework-shell :where(main, .fixed) [class*="hover:bg-slate-"]:hover { background-color: #ebe6da !important; }
+.casework-shell :where(main, .fixed) [class*="hover:bg-teal-"]:hover { background-color: #f1d5cf !important; }
+.casework-shell :where(main, .fixed) .bg-teal-600, .casework-shell :where(main, .fixed) .bg-teal-700 { background-color: #a33b32 !important; color: #fff8ee !important; }
+
+@media (max-width: 767px) {
+  .casework-shell { min-height: 100dvh; height: auto !important; overflow: visible !important; }
+  .casework-shell > div.flex-1 { min-height: 100dvh; height: auto !important; }
+  .casework-sidebar, .casework-sidebar.is-collapsed { position: fixed; inset: 0 auto 0 0; width: min(17rem, 86vw) !important; transform: translateX(-105%); box-shadow: 12px 0 30px rgba(24,36,51,.25); }
+  .casework-sidebar.is-mobile-open { transform: translateX(0); }
+  .casework-sidebar.is-collapsed > div:first-child > button:first-child > span { display: inline !important; }
+  .casework-sidebar.is-collapsed > div:first-child { justify-content: space-between !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+  .casework-sidebar.is-collapsed > div:first-child > button:first-child { flex: initial; justify-content: flex-start; }
+  .casework-sidebar.is-collapsed .brand-unit,
+  .casework-sidebar.is-collapsed nav span:not(:first-child),
+  .casework-sidebar.is-collapsed > div:not(:first-child) .truncate,
+  .casework-sidebar.is-collapsed > div:not(:first-child) .text-\[10px\],
+  .casework-sidebar.is-collapsed > div:not(:first-child) .text-\[11px\] { display: initial !important; }
+  .casework-sidebar.is-collapsed > div, .casework-sidebar.is-collapsed nav { padding-left: .75rem !important; padding-right: .75rem !important; }
+  .casework-sidebar.is-collapsed nav button { justify-content: flex-start; padding-left: .75rem !important; padding-right: .75rem !important; }
+  .sidebar-collapse-toggle { display: none; }
+  .mobile-menu-toggle { display: inline-flex; align-items: center; justify-content: center; color: #182433; padding: .35rem; margin-left: -.35rem; border-radius: 2px; }
+  .mobile-menu-toggle:hover { background: #ebe6da; }
+  .mobile-nav-scrim { display: block; position: fixed; inset: 0; z-index: 40; background: rgba(18,27,37,.42); }
+  .casework-header { height: 3.75rem !important; padding-left: 1rem !important; padding-right: 1rem !important; gap: .5rem !important; }
+  .casework-header > div:first-child { min-width: 0; }
+  .casework-header > div:last-child { gap: .25rem !important; }
+  .casework-header .qr-toggle, .casework-header .reset-toggle { display: none !important; }
+  .casework-header .presentation-toggle { width: 1.9rem; padding-left: 0 !important; padding-right: 0 !important; justify-content: center; }
+  .casework-header .presentation-toggle span { display: none; }
+  .casework-header .role-toggle { width: 1.9rem; padding-left: 0 !important; padding-right: 0 !important; justify-content: center; }
+  .casework-header .role-toggle span:not(:first-child) { display: none; }
+  .casework-header .profile-toggle { padding-left: .25rem !important; padding-right: .25rem !important; }
+  .casework-header .profile-toggle > svg { display: none; }
+  .casework-header .profile-toggle .hidden { display: none !important; }
+  .casework-header .max-w-\[150px\] { max-width: 7rem !important; }
+  .casework-page { padding: 1.25rem 1rem 2rem !important; }
+  .casework-page h1 { font-size: 1.75rem !important; line-height: 1.1; }
+  .casework-page .grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .casework-page table { min-width: 37rem; }
+  .casework-page .overflow-hidden:has(table) { overflow-x: auto !important; }
+  .casework-shell main > * { min-width: 0; }
+  .presentation-mode main .text-xs { font-size: .75rem !important; }
+  .presentation-mode main .text-sm { font-size: .875rem !important; }
+  .presentation-mode .casework-header { padding-right: 1rem !important; }
+  .presentation-mode .casework-header::after { display: none; }
+  .presentation-briefing-bar { padding: .4rem 1rem; }
+  .presentation-case-label { display: none; }
+  .presentation-deck { width: calc(100% - 1.5rem); bottom: .75rem; justify-content: space-between; }
+  .presentation-deck button { padding: .55rem .35rem; font-size: .64rem; gap: .2rem; }
+  .presentation-deck button span { display: none; }
+}
+
+
+
+/* Custom scrollbars for intel dashboard feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 22, 38, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #24304D;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0D9488;
+}
+
+/* High contrast print styles for court & dossier exports */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .dossier-print-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    color: #111827 !important;
+    background: #FFFFFF !important;
+  }
+}
