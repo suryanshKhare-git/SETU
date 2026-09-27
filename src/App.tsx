@@ -17,6 +17,12 @@ import { TimelineView } from './components/timeline/TimelineView';
 import { CaseWorkspace } from './components/workspace/CaseWorkspace';
 import { AuditLogView } from './components/audit/AuditLogView';
 
+/* =========================================================
+   LOCATION INTELLIGENCE
+   ========================================================= */
+
+import { LocationIntelligenceView } from './components/location/LocationIntelligenceView';
+
 import { EvidenceSourceModal } from './components/common/EvidenceSourceModal';
 import { KeyboardShortcutsModal } from './components/common/KeyboardShortcutsModal';
 import { CaseSelectModal } from './components/common/CaseSelectModal';
@@ -240,7 +246,11 @@ const MainContent: React.FC = () => {
 
   return (
     <div
-      className={`casework-shell ${isPresentationMode ? 'presentation-mode' : ''} h-screen flex overflow-hidden bg-[#0B0F17] text-slate-100 font-sans`}
+      className={`casework-shell ${
+        isPresentationMode
+          ? 'presentation-mode'
+          : ''
+      } h-screen flex overflow-hidden bg-[#0B0F17] text-slate-100 font-sans`}
     >
 
       {/* =================================================
@@ -253,15 +263,23 @@ const MainContent: React.FC = () => {
         }
         isCollapsed={sidebarCollapsed}
         isMobileOpen={mobileNavOpen}
-        onToggleCollapse={() => setSidebarCollapsed(previous => !previous)}
-        onCloseMobile={() => setMobileNavOpen(false)}
+        onToggleCollapse={() =>
+          setSidebarCollapsed(
+            previous => !previous
+          )
+        }
+        onCloseMobile={() =>
+          setMobileNavOpen(false)
+        }
       />
 
       {mobileNavOpen && (
         <button
           aria-label="Close navigation"
           className="mobile-nav-scrim"
-          onClick={() => setMobileNavOpen(false)}
+          onClick={() =>
+            setMobileNavOpen(false)
+          }
         />
       )}
 
@@ -282,13 +300,25 @@ const MainContent: React.FC = () => {
 
         {/* HEADER */}
 
-        <Header onOpenSidebar={() => setMobileNavOpen(true)} />
+        <Header
+          onOpenSidebar={() =>
+            setMobileNavOpen(true)
+          }
+        />
 
         {isPresentationMode && (
           <div className="presentation-briefing-bar no-print">
             <span className="presentation-live-dot" />
-            <span className="presentation-case-label">Live case briefing</span>
-            <span className="presentation-case-name">{selectedCase ? `${selectedCase.firNumber} · ${selectedCase.title}` : 'No investigation selected'}</span>
+
+            <span className="presentation-case-label">
+              Live case briefing
+            </span>
+
+            <span className="presentation-case-name">
+              {selectedCase
+                ? `${selectedCase.firNumber} · ${selectedCase.title}`
+                : 'No investigation selected'}
+            </span>
           </div>
         )}
 
@@ -360,23 +390,58 @@ const MainContent: React.FC = () => {
             <AuditLogView />
           )}
 
+          {/* =================================================
+              LOCATION INTELLIGENCE
+          ================================================= */}
+
+          {activeView === 'location-intelligence' && (
+            <LocationIntelligenceView />
+          )}
+
         </main>
 
         {isPresentationMode && (
-          <nav className="presentation-deck no-print" aria-label="Presentation navigation">
+          <nav
+            className="presentation-deck no-print"
+            aria-label="Presentation navigation"
+          >
             {[
-              { id: 'home' as const, label: 'Overview' },
-              { id: 'graph' as const, label: 'Network' },
-              { id: 'insights' as const, label: 'Insights' },
-              { id: 'timeline' as const, label: 'Timeline' },
-              { id: 'workspace' as const, label: 'Board' },
+              {
+                id: 'home' as const,
+                label: 'Overview',
+              },
+              {
+                id: 'graph' as const,
+                label: 'Network',
+              },
+              {
+                id: 'insights' as const,
+                label: 'Insights',
+              },
+              {
+                id: 'timeline' as const,
+                label: 'Timeline',
+              },
+              {
+                id: 'workspace' as const,
+                label: 'Board',
+              },
             ].map((item, index) => (
               <button
                 key={item.id}
-                onClick={() => setActiveView(item.id)}
-                className={activeView === item.id ? 'is-active' : ''}
+                onClick={() =>
+                  setActiveView(item.id)
+                }
+                className={
+                  activeView === item.id
+                    ? 'is-active'
+                    : ''
+                }
               >
-                <span>{String(index + 1).padStart(2, '0')}</span>
+                <span>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
                 {item.label}
               </button>
             ))}
